@@ -1,21 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FizzbuzzLibrary
 {
+    /// <summary>
+    /// A Fizzbuzz parsing library
+    /// </summary>
     public class Fizzbuzz
     {
-        private readonly IWriter _writer;
+        private readonly IWritter _writter;
 
-        public Fizzbuzz(IWriter writer)
+        /// <summary>
+        /// Construts a Fizzbuzz instance
+        /// </summary>
+        /// <param name="writter">Output writter to use</param>
+        public Fizzbuzz(IWritter writter)
         {
-            _writer = writer;
+            _writter = writter;
         }
 
-        public string Trans(int n)
+        /// <summary>
+        /// Parse an input integer
+        /// </summary>
+        /// <param name="n">the integer to be parsed</param>
+        /// <returns>a parsed string </returns>
+        public string Parse(int n)
         {
             var sb = new StringBuilder();
             if (n%3 == 0)
@@ -36,22 +45,14 @@ namespace FizzbuzzLibrary
 
         }
 
+
+        /// <summary>
+        /// Run Fizzbuzz to array of integers
+        /// </summary>
+        /// <param name="numbers"></param>
         public void Run(params int[] numbers)
         {
-           new List<int>(numbers).ForEach( n =>  this._writer.WriteLine(this.Trans(n)));
-        }
-    }
-
-    public interface IWriter
-    {
-        void WriteLine(string r);
-    }
-
-    public class AppWriter : IWriter
-    {
-        public void WriteLine(string r)
-        {
-            Console.WriteLine(r);
+           new List<int>(numbers).ForEach( n =>  this._writter.WriteLine(this.Parse(n)));
         }
     }
 }

@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using FizzbuzzLibrary;
 
-namespace Runner
+namespace Fizzbuzz.Runner.Console
 {
+    //console Fizzbuzz runner
     internal class Program
     {
         static void Main(string[] args)
         {
-           var app = new FizzbuzzLibrary.Fizzbuzz(new AppWriter());
+           var app = new FizzbuzzLibrary.Fizzbuzz(new ConsoleWritter());
 
             app.Run(Enumerable.Range(1,100).ToArray());
-            Console.Read();
+            System.Console.Read();
         }
     }
 }

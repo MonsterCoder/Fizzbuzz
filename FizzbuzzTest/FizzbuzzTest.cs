@@ -11,15 +11,15 @@ namespace FizzbuzzTest
 {
     public class FizzbuzzTest
     {
-        private Mock mock = new Mock<IWriter>();
+        private Mock mock = new Mock<IWritter>();
         
         private Fizzbuzz sut ;
-        private IWriter _mockWriter;
+        private IWritter _mockWritter;
 
         public FizzbuzzTest()
         {
-            _mockWriter = (IWriter)mock.Object;
-            sut = new Fizzbuzz(_mockWriter);
+            _mockWritter = (IWritter)mock.Object;
+            sut = new Fizzbuzz(_mockWritter);
         }
 
         [Theory]
@@ -27,7 +27,7 @@ namespace FizzbuzzTest
         [InlineData(6)]
         public void WhenMultipleOf3ReturnFizz(int n)
         {
-            Assert.Equal(sut.Trans(n), "Fizz");
+            Assert.Equal(sut.Parse(n), "Fizz");
         }
 
         [Theory]
@@ -35,7 +35,7 @@ namespace FizzbuzzTest
         [InlineData(10)]
         public void WhenMultipleOf5ReturnBuzz(int n)
         {
-            Assert.Equal(sut.Trans(n), "Buzz");
+            Assert.Equal(sut.Parse(n), "Buzz");
         }
 
         [Theory]
@@ -43,7 +43,7 @@ namespace FizzbuzzTest
         [InlineData(30)]
         public void WhenMulitpleOfBothReturnFizzBuzz(int n)
         {
-            Assert.Equal(sut.Trans(n), "FizzBuzz");
+            Assert.Equal(sut.Parse(n), "FizzBuzz");
         }
 
         [Theory]
@@ -51,7 +51,7 @@ namespace FizzbuzzTest
         [InlineData(7)]
         public void WhenNotReturnTheNumber(int n)
         {
-            Assert.Equal(sut.Trans(n), n.ToString());
+            Assert.Equal(sut.Parse(n), n.ToString());
         }
 
 
