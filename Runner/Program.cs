@@ -12,7 +12,9 @@ namespace Fizzbuzz.Runner.Console
     {
         static void Main(string[] args)
         {
-           var app = new FizzbuzzLibrary.Fizzbuzz(new ConsoleWritter());
+           var app = new FizzbuzzLibrary.Fizzbuzz(new ConsoleWritter(),
+               new KeyValuePair<int, string>(3, "Fizz"), 
+               new KeyValuePair<int, string>(5, "Buzz"));
 
             app.Run(-100,100);
             System.Console.Read();

@@ -58,11 +58,11 @@ namespace FizzbuzzTest
         [Fact]
         public void WhenRunFizzbuzzShouldOutputResult()
         {
-            sut.Run(1,15);
-            mock.Verify(writter => writter.WriteLine("Fizz"), Times.Exactly(4));
-            mock.Verify(writter => writter.WriteLine("Buzz"), Times.Exactly(2));
-            mock.Verify(writter => writter.WriteLine("FizzBuzz"), Times.Exactly(1));
-            mock.Verify(writter => writter.WriteLine(It.IsAny<string>()), Times.Exactly(15));
+            sut.Run(-15,15);
+            mock.Verify(writter => writter.WriteLine("Fizz"), Times.Exactly(8));
+            mock.Verify(writter => writter.WriteLine("Buzz"), Times.Exactly(4));
+            mock.Verify(writter => writter.WriteLine("FizzBuzz"), Times.Exactly(2));
+            mock.Verify(writter => writter.WriteLine(It.IsAny<string>()), Times.Exactly(31));
         }
 
     }
