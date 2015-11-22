@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using FizzbuzzLibrary;
 using Moq;
 using Xunit;
@@ -16,12 +11,9 @@ namespace FizzbuzzTest
         
         private readonly Fizzbuzz sut ;
 
-        private readonly IWritter _mockWritter;
-
         public FizzbuzzTest()
         {
-            _mockWritter = mock.Object;
-            sut = new Fizzbuzz(_mockWritter);
+            sut = new Fizzbuzz(mock.Object);
         }
 
         [Theory]
@@ -64,6 +56,29 @@ namespace FizzbuzzTest
             mock.Verify(writter => writter.WriteLine("Buzz"), Times.Exactly(2));
             mock.Verify(writter => writter.WriteLine("FizzBuzz"), Times.Exactly(1));
             mock.Verify(writter => writter.WriteLine(It.IsAny<string>()), Times.Exactly(15));
+        }
+
+    }
+
+    public class FizzbuzzRuleTest
+    {
+        Fizzbuzz.Rule sut = new Fizzbuzz.Rule(4, "Foo");
+
+        [Theory]
+        [InlineData(4)]
+        [InlineData(8)]
+        public void WhenModWithKeyReturnsValue(int n)
+        {
+            Assert.Equal(sut.Apply(n), "Foo");
+        }
+
+        [Theory]
+        [InlineData(5)]
+        [InlineData(3)]
+        [InlineData(1)]
+        public void WhenNotModOfKeyReturnsEmpty(int n)
+        {
+            Assert.Equal(sut.Apply(n), string.Empty);
         }
     }
 }

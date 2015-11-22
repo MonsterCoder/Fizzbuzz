@@ -54,5 +54,25 @@ namespace FizzbuzzLibrary
         {
            new List<int>(numbers).ForEach( n =>  this._writter.WriteLine(this.Parse(n)));
         }
+
+        /// <summary>
+        /// Rule of  parsing 
+        /// </summary>
+        public class Rule
+        {
+            private readonly int _key;
+            private readonly string _value;
+
+            public Rule(int key, string value)
+            {
+                _key = key;
+                _value = value;
+            }
+
+            public string Apply(int n)
+            {
+                return n % _key ==0 ? _value : string.Empty;
+            }
+        }
     }
 }
