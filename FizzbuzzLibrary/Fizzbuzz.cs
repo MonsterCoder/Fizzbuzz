@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace FizzbuzzLibrary
@@ -10,13 +11,15 @@ namespace FizzbuzzLibrary
     public class Fizzbuzz
     {
         private readonly IWritter _writter;
+        private readonly List<Rule> _rules;
 
         /// <summary>
         /// Construts a Fizzbuzz instance
         /// </summary>
         /// <param name="writter">Output writter to use</param>
-        public Fizzbuzz(IWritter writter)
+        public Fizzbuzz(IWritter writter, params KeyValuePair<int, string>[] rules )
         {
+            this._rules = rules.Select(r => new Rule(r.Key, r.Value)).ToList();
             _writter = writter;
         }
 
@@ -27,22 +30,13 @@ namespace FizzbuzzLibrary
         /// <returns>a parsed string </returns>
         public string Parse(int n)
         {
-            var sb = new StringBuilder();
-            if (n%3 == 0)
-            {
-                sb.Append( "Fizz");
-            }
+            var result =  this._rules.Aggregate(new StringBuilder(), (sb, r) => sb.Append(r.Apply(n)));
 
-            if (n%5 == 0)
+            if (result.Length == 0)
             {
-                sb.Append("Buzz");
+                result.Append(n.ToString());
             }
-
-            if (sb.Length == 0)
-            {
-                sb.Append(n.ToString());
-            }
-            return sb.ToString();
+            return result.ToString();
 
         }
 

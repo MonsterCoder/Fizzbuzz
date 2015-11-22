@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FizzbuzzLibrary;
 using Moq;
@@ -14,7 +15,7 @@ namespace FizzbuzzTest
 
         public FizzbuzzTest()
         {
-            sut = new Fizzbuzz(mock.Object);
+            sut = new Fizzbuzz(mock.Object, new KeyValuePair<int, string>(3, "Fizz"), new KeyValuePair<int, string>(5, "Buzz"));
         }
 
         [Theory]
