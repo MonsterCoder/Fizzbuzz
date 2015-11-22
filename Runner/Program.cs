@@ -14,7 +14,7 @@ namespace Fizzbuzz.Runner.Console
         {
            var app = new FizzbuzzLibrary.Fizzbuzz(new ConsoleWritter());
 
-            app.Run(Enumerable.Range(1,100).ToArray());
+            app.Run(-100,100);
             System.Console.Read();
         }
     }

@@ -18,6 +18,11 @@ namespace FizzbuzzTest
             sut = new Fizzbuzz(mock.Object, new KeyValuePair<int, string>(3, "Fizz"), new KeyValuePair<int, string>(5, "Buzz"));
         }
 
+        [Fact]
+        public void WhenLowerboundLargerThanUpperBoundThrowException()
+        {
+            Assert.Throws<ArgumentException>(() => sut.Run(999, 1));
+        }
         [Theory]
         [InlineData(3)]
         [InlineData(6)]
@@ -53,7 +58,7 @@ namespace FizzbuzzTest
         [Fact]
         public void WhenRunFizzbuzzShouldOutputResult()
         {
-            sut.Run(Enumerable.Range(1,15).ToArray());
+            sut.Run(1,15);
             mock.Verify(writter => writter.WriteLine("Fizz"), Times.Exactly(4));
             mock.Verify(writter => writter.WriteLine("Buzz"), Times.Exactly(2));
             mock.Verify(writter => writter.WriteLine("FizzBuzz"), Times.Exactly(1));

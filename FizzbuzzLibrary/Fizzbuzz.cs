@@ -40,14 +40,18 @@ namespace FizzbuzzLibrary
 
         }
 
-
         /// <summary>
         /// Run Fizzbuzz to array of integers
         /// </summary>
-        /// <param name="numbers"></param>
-        public void Run(params int[] numbers)
+        /// <param name="lowerbound"></param>
+        /// <param name="higherbound"></param>
+        public void Run(int lowerbound, int higherbound)
         {
-           new List<int>(numbers).ForEach( n =>  this._writter.WriteLine(this.Parse(n)));
+            if (lowerbound > higherbound)
+            {
+                throw new ArgumentException();
+            }
+           Enumerable.Range(lowerbound,higherbound).ToList().ForEach( n =>  this._writter.WriteLine(this.Parse(n)));
         }
 
         /// <summary>
