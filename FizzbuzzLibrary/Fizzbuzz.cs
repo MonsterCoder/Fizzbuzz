@@ -11,7 +11,7 @@ namespace FizzbuzzLibrary
     public class Fizzbuzz
     {
         private readonly IWritter _writter;
-        private readonly List<Rule> _rules;
+        private readonly IEnumerable<Rule> _rules;
 
         /// <summary>
         /// Construts a Fizzbuzz instance
@@ -20,8 +20,8 @@ namespace FizzbuzzLibrary
         /// <param name="rules">Rules to apply to the game</param>
         public Fizzbuzz(IWritter writter, params KeyValuePair<int, string>[] rules )
         {
-            this._rules = rules.Select(r => new Rule(r.Key, r.Value)).ToList();
-            _writter = writter;
+            this._rules = rules.Select(r => new Rule(r.Key, r.Value));
+            this._writter = writter;
         }
 
         /// <summary>
@@ -31,14 +31,14 @@ namespace FizzbuzzLibrary
         /// <returns>a parsed string </returns>
         public string Parse(int n)
         {
-            var result =  this._rules.Aggregate(new StringBuilder(), (sb, r) => sb.Append(r.Apply(n)));
+            var result =  this._rules.Aggregate(new StringBuilder(), (stringBuilder, rule) => stringBuilder.Append(rule.Apply(n)));
 
             if (result.Length == 0)
             {
                 result.Append(n.ToString());
             }
-            return result.ToString();
 
+            return result.ToString();
         }
 
         /// <summary>
