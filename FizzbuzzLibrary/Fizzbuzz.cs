@@ -17,6 +17,7 @@ namespace FizzbuzzLibrary
         /// Construts a Fizzbuzz instance
         /// </summary>
         /// <param name="writter">Output writter to use</param>
+        /// <param name="rules">Rules to apply to the game</param>
         public Fizzbuzz(IWritter writter, params KeyValuePair<int, string>[] rules )
         {
             this._rules = rules.Select(r => new Rule(r.Key, r.Value)).ToList();
@@ -44,18 +45,18 @@ namespace FizzbuzzLibrary
         /// Run Fizzbuzz to array of integers
         /// </summary>
         /// <param name="lowerbound"></param>
-        /// <param name="higherbound"></param>
-        public void Run(int lowerbound, int higherbound)
+        /// <param name="upperbound"></param>
+        public void Run(int lowerbound, int upperbound)
         {
-            if (lowerbound > higherbound)
+            if (lowerbound > upperbound)
             {
                 throw new ArgumentException();
             }
-           Enumerable.Range(lowerbound,higherbound).ToList().ForEach( n =>  this._writter.WriteLine(this.Parse(n)));
+           Enumerable.Range(lowerbound,upperbound).ToList().ForEach( n =>  this._writter.WriteLine(this.Parse(n)));
         }
 
         /// <summary>
-        /// Rule of  parsing 
+        /// Rule for  parsing 
         /// </summary>
         public class Rule
         {
@@ -72,6 +73,11 @@ namespace FizzbuzzLibrary
                 _value = value;
             }
 
+            /// <summary>
+            /// apply rule to the input number
+            /// </summary>
+            /// <param name="n"></param>
+            /// <returns></returns>
             public string Apply(int n)
             {
                 return (n != 0 && n % _key ==0) ? _value : string.Empty;
