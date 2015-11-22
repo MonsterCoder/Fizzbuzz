@@ -52,8 +52,16 @@ namespace FizzbuzzLibrary
             {
                 throw new ArgumentException();
             }
-            
-           Enumerable.Range(lowerbound,(upperbound - lowerbound+1)).ToList().ForEach( n =>  this._writter.WriteLine(this.Parse(n)));
+
+            Enumerable.Range(lowerbound, (upperbound - lowerbound + 1))
+                .Select(this.Parse)
+                .ToList()
+                .ForEach(this.Output);
+        }
+
+        private void Output(string str)
+        {
+            this._writter.WriteLine(str);
         }
 
         /// <summary>
