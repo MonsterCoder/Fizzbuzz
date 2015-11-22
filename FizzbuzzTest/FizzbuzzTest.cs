@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FizzbuzzLibrary;
 using Moq;
 using Xunit;
@@ -79,6 +80,18 @@ namespace FizzbuzzTest
         public void WhenNotModOfKeyReturnsEmpty(int n)
         {
             Assert.Equal(sut.Apply(n), string.Empty);
+        }
+
+        [Fact]
+        public void WhenKeyIsZeroThrowsException()
+        {
+            Assert.Throws<ArgumentException>(() => new Fizzbuzz.Rule(0, "Hello"));
+        }
+
+        [Fact]
+        public void WhenInputZeroItReturnsEmpty()
+        {
+            Assert.Equal(sut.Apply(0), string.Empty);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace FizzbuzzLibrary
@@ -65,13 +66,17 @@ namespace FizzbuzzLibrary
 
             public Rule(int key, string value)
             {
+                if (key == 0)
+                {
+                    throw new ArgumentException();
+                }
                 _key = key;
                 _value = value;
             }
 
             public string Apply(int n)
             {
-                return n % _key ==0 ? _value : string.Empty;
+                return (n != 0 && n % _key ==0) ? _value : string.Empty;
             }
         }
     }
